@@ -20,10 +20,20 @@
     "url": "https://github.com/Rousters/Rouster-Backend/issues"
   },
   "homepage": "https://github.com/Rousters/Rouster-Backend",
+  "devDependencies": {
+    "chai": "^2.0.0",
+    "chai-http": "^1.0.0",
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-jscs": "^0.1.8",
+    "grunt-contrib-jshint": "^0.11.0",
+    "grunt-simple-mocha": "^0.4.0",
+    "mocha": "^2.1.0"
+  },
   "dependencies": {
+    "express": "^4.12.0",
     "bcrypt-nodejs": "0.0.3",
     "eat": "^0.1.1",
-    "express": "^4.12.0",
     "mongoose": "^3.8.23"
   }
 }
