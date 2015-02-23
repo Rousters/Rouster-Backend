@@ -19,5 +19,11 @@
   "bugs": {
     "url": "https://github.com/Rousters/Rouster-Backend/issues"
   },
-  "homepage": "https://github.com/Rousters/Rouster-Backend"
+  "homepage": "https://github.com/Rousters/Rouster-Backend",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "eat": "^0.1.1",
+    "express": "^4.12.0",
+    "mongoose": "^3.8.23"
+  }
 }
