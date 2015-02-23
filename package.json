@@ -1,0 +1,23 @@
+{
+  "name": "Rouster-Backend",
+  "version": "0.1.0",
+  "description": "Backend for Rouster",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Rousters/Rouster-Backend.git"
+  },
+  "author": "Sean Golob, Ian McCunn, Eric Mentele, Rodrigo Carballo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Rousters/Rouster-Backend/issues"
+  },
+  "homepage": "https://github.com/Rousters/Rouster-Backend"
+}
