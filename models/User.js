@@ -2,15 +2,20 @@
 
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
-var eat = require('eat');
 
 var userSchema = new mongoose.Schema({
-  id: String;
+  basic: {
+    id: String
+  },
   pointCount: {type: Number, default: 0}
 });
 
-userSchema.methods.hashID = function(password) {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(8));
+userSchema.methods.hashID = function(identification) {
+  return bcrypt.hashSync(identification, bcrypt.genSaltSync(8), null);
 };
+
+userSchema.methods.validID = function(identification) {
+  return bcrypt.compareSync(identification, this.basic.id);
+}
 
 module.exports = mongoose.model('User', userSchema);
