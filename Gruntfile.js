@@ -12,7 +12,7 @@ module.exports = function(grunt) {
         jshintrc: '.jshintrc'
       },
       dev: {
-          src: ['Gruntfile.js', 'lib/**/*.js', 'test/**/*.js', 'index.js']
+          src: ['Gruntfile.js', 'lib/**/*.js', 'test/**/*.js', 'server.js', 'routes/**/*.js', 'models/**/*.js']
       }
     },
     jscs: {
@@ -28,7 +28,7 @@ module.exports = function(grunt) {
     },
     watch: {
       scripts: {
-        files: ['routes/**/*.js', 'models/**/*.js', 'lib/**/*.js', 'test/*.js'],
+        files: ['Gruntfile.js', 'lib/**/*.js', 'test/**/*.js', 'server.js', 'routes/**/*.js', 'models/**/*.js'],
         tasks: ['jshint']
       }
     }
