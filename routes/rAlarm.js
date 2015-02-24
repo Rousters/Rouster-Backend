@@ -3,10 +3,11 @@
 var bodyparser = require('body-parser');
 var Alarm = require('../models/Alarm');
 var User = require('../models/User');
+var eat_auth = require('../lib/eat_auth');
 
-module.exports = function(app, passport){
+module.exports = function(app, appSecret){
   app.use(bodyparser);
-  app.post('/create_alarm', function(req, res){
+  app.post('/create_alarm', eat_auth(appSecret), function(req, res){
     console.log('hit create alarm!');
     // var newAlarm = new Alarm();
     // newAlarm.alarmTime = req.body.time;
@@ -17,7 +18,7 @@ module.exports = function(app, passport){
     // });
   });
 
-  app.patch('/check_alarm', function(req, res){
+  app.patch('/check_alarm', eat_auth(appSecret), function(req, res){
     console.log('hit check alarm!');
   //   var check = 0;
   //   Alarm.findOne({id: req.body.id}, function(err, alarm){
@@ -33,5 +34,5 @@ module.exports = function(app, passport){
   //     res.json({msg: 'Congrats! Point for you!'});
   //   }
   //   res.json({msg: 'you suck'});
-  // });
+  });
 };

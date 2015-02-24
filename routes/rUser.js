@@ -12,10 +12,10 @@ module.exports = function(app, appSecret) {
     newUser.save(function(err, user){
       if (err) return res.status(500).send({msg: 'could not create user'});
 
-      user.generateToken(appSecret, function(err, token){
+      newUser.generateToken(appSecret, function(err, token){
         if (err) return res.status(500).send({msg: 'could not generate token'});
         res.json({eat: token});
-      })
+      });
     });
   });
 };
