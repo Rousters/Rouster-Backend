@@ -48,7 +48,7 @@ describe('/create_user, /user, and /user/id/alarm routes spec', function() {
   });
 
 
-  describe('/user/id/alarm specific route'), function() {
+  describe('/user/id/alarm specific route', function() {
     var id;
     before(function(done) { // jshint ignore: line
       chai.request(server)
@@ -93,7 +93,6 @@ describe('/create_user, /user, and /user/id/alarm routes spec', function() {
         .end(function(err, res){
           done();
         });
-      });
     });
   });
 
@@ -102,5 +101,5 @@ describe('/create_user, /user, and /user/id/alarm routes spec', function() {
       done();
     });
   });
-
 });
+
