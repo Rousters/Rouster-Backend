@@ -39,22 +39,22 @@ describe('/create_user, /user, and /user/id/alarm routes spec', function() {
           done();
         });
     });
-    it('patch should update app/alarm schma data, and an return message', function(done) {
+    it('patch should add point if wake time met', function(done) {
       chai.request(server)
         .patch('/check_alarm')
         .send({id: id, eat: token, wakeTime: 104})
-        .end(function(err, res){
+        .end(function(err, res) {
           expect(err).to.eql(null);
           expect(res).to.have.status(200);
           expect(res.body.msg).to.eql('point added!');
           done();
         });
     });
-    it('patch should update app/alarm schma data, and an return message', function(done) {
+    it('patch should not add point if wake time not met', function(done) {
       chai.request(server)
         .patch('/check_alarm')
         .send({id: id, eat: token, wakeTime: 110})
-        .end(function(err, res){
+        .end(function(err, res) {
           expect(err).to.eql(null);
           expect(res).to.have.status(200);
           expect(res.body.msg).to.eql('you suck');
@@ -63,10 +63,9 @@ describe('/create_user, /user, and /user/id/alarm routes spec', function() {
     });
   });
 
-  after(function(done){
-    mongoose.connection.db.dropDatabase(function(){
+  after(function(done) {
+    mongoose.connection.db.dropDatabase(function() {
       done();
     });
   });
 });
-

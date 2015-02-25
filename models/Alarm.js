@@ -8,8 +8,8 @@ var alarmSchema = new mongoose.Schema({
   id: String
 });
 
-alarmSchema.methods.compareTimes = function(){
-  if(this.wakeTime - this.alarmTime < 5){
+alarmSchema.methods.compareTimes = function() {
+  if (this.wakeTime - this.alarmTime < 5) {
     return 1;
   }
   return 0;
