@@ -7,9 +7,14 @@ var eat_auth = require('../lib/eat_auth');
 module.exports = function(app, appSecret) {
   app.use(bodyparser.json());
 
+  /**
+   *      Route Callback: Route to create a user from Apple id data.
+   *      
+   * @param  {Object} req  The request object.
+   * @param  {Object} res  The response object. 
+   * @return {Undefined}   Will only return undefined in the event of a DB read error.
+   */
   app.post('/create_user', function(req, res) {
-    console.log('post request for /create_user');
-
     var newUser = new User();
     newUser.id = req.body.id;
     newUser.save(function(err, user){
@@ -19,16 +24,29 @@ module.exports = function(app, appSecret) {
       }
 
       newUser.generateToken(appSecret, function(err, token){
-        if (err) return res.status(500).send({msg: 'could not generate token'});
+        if (err) {
+          res.status(500).send({msg: 'could not generate token'});
+          return;
+        }
         res.json({eat: token});
       });
     });
   });
 
+  /**
+   *      Route Callback: Fetches the pointCount from the user schema 
+   *      
+   * @param  {Object} req  The request object
+   * @param  {Object} res  The response object
+   * @return {undefined}   Only returns on DB read error.
+   */
   app.get('/get_points', eat_auth(appSecret), function(req, res) {
     console.log('hit get user');
     User.findOne({id: req.body.id}, function(err, user){
-      if (err) return res.status(500).send({msg: 'could not get user'});
+      if (err) {
+        res.status(500).send({msg: 'could not get user'});
+        return;
+      }
       res.json({pointCount: user.pointCount});
     });
   });
