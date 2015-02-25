@@ -12,11 +12,11 @@ module.exports = function(grunt) {
         jshintrc: '.jshintrc'
       },
       dev: {
-          src: ['Gruntfile.js', 'lib/**/*.js', 'test/**/*.js', 'server.js', 'routes/**/*.js', 'models/**/*.js']
+          src: ['lib/**/*.js', 'test/**/*.js', 'server.js', 'routes/**/*.js', 'models/**/*.js']
       }
     },
     jscs: {
-      src: ['lib/**/*.js', 'test/*.js', 'index.js'],
+      src: ['lib/**/*.js', 'test/**/*.js', 'server.js', 'routes/**/*.js', 'models/**/*.js'],
       options: {
         config: '.jscsrc'
       }
