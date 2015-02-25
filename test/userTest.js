@@ -9,7 +9,7 @@ var expect = chai.expect;
 
 chai.use(chaihttp);
 
-var server = 'localhost:3000'
+var server = 'localhost:3000';
 
 describe('/create_user, /user, and /user/id/alarm routes spec', function() {
   var id = 'testID';
@@ -23,7 +23,7 @@ describe('/create_user, /user, and /user/id/alarm routes spec', function() {
         .end(function(err, res) {
           expect(err).to.eql(null);
           expect(res).to.have.status(200);
-          expect(res).to.have.property('eat');
+          expect(res.body).to.have.property('eat');
           token = res.body.eat;
           done();
         });
