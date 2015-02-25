@@ -9,7 +9,7 @@ var expect = chai.expect;
 
 chai.use(chaihttp);
 
-var server = 'localhost:3000'
+var server = 'localhost:3000';
 
 describe('/create_user, /user, and /user/id/alarm routes spec', function() {
   var id = 'testID';
