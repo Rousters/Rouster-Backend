@@ -20,21 +20,18 @@ module.exports = function(app, appSecret){
 
   app.patch('/check_alarm', eat_auth(appSecret), function(req, res){
     console.log('hit check alarm!');
-    var check = 0;
-    Alarm.findOne({id: req.body.id}, function(err, alarm){
-      console.log('got past findOne');
+    Alarm.findOneAndUpdate({id: req.body.id}, {wakeTime: req.body.wakeTime}, function(err, alarm){
       if (err) return res.status(500).send({msg: 'could not check alarm'});
-      var counter = alarm.counter;
-      alarm.wakeTime = req.body.wakeTime;
-      if(alarm.compareTimes)
+      if(alarm.compareTimes()){
+        console.log('got past comparetimes');
+        User.findOneAndUpdate({id: req.body.id}, {$inc: {pointCount: 1}}, function(err, user){
+          if (err) return res.status(500).send({msg: 'could not add to pointcount'});
+          res.json({msg: 'point added!'});
+
+        });
+      }
+      else {res.json({msg: 'you suck'})};
     });
-    if(check){
-      User.findOne({id: req.body.id}, function(err, user){
-        if (err) return res.status(500).send({msg: 'could not check alarm'});
-        user.pointCount += 1;
-      });
-      res.json({msg: 'Congrats! Point for you!'});
-    }
-    res.json({msg: 'you suck'});
+
   });
 };
