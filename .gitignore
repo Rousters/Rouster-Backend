@@ -2,3 +2,4 @@
 **/*.sw?
 **/npm-debug.log
 **/data/
+instructions.txt

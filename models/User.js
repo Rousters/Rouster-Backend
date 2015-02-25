@@ -9,7 +9,7 @@ var userSchema = new mongoose.Schema({
 });
 
 userSchema.methods.generateToken = function(appSecret, callback) {
-  eat.encode({id: this.id, timestamp: new Date()}, appSecret, callback);
+  eat.encode({id: this.id}, appSecret, callback);
 };
 
 module.exports = mongoose.model('User', userSchema);
