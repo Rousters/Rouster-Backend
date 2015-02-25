@@ -6,13 +6,19 @@ var eat_auth = require('../lib/eat_auth');
 
 module.exports = function(app, appSecret) {
   app.use(bodyparser.json());
+
   app.post('/create_user', function(req, res) {
-    console.log('hit user');
+    console.log('post request for /create_user');
+
     var newUser = new User();
     newUser.id = req.body.id;
     newUser.save(function(err, user){
-      if (err) return res.status(500).send({msg: 'could not create user'});
-
+      if (err) {
+        res.status(500).send({msg: 'could not create user'});
+        return;
+      }
+      res.json({msg: 'user created!'});
+  
       newUser.generateToken(appSecret, function(err, token){
         if (err) return res.status(500).send({msg: 'could not generate token'});
         res.json({eat: token});
