@@ -8,7 +8,7 @@ var userRoutes = require('./routes/rUser');
 var alarmRoutes = require('./routes/rAlarm');
 
 
-mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost/alarm_dev');
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/alarm_dev');
 
 var app = express();
 
