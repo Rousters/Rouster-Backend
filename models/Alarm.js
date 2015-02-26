@@ -9,7 +9,7 @@ var alarmSchema = new mongoose.Schema({
 });
 
 alarmSchema.methods.compareTimes = function(){
-  if(this.wakeTime - this.alarmTime < 5){
+  if(this.wakeTime - this.alarmTime < 300){
     return 1;
   }
   return 0;

@@ -29,7 +29,11 @@ module.exports = function(app, appSecret) {
     console.log('hit get user');
     User.findOne({id: req.body.id}, function(err, user){
       if (err) return res.status(500).send({msg: 'could not get user'});
-      res.json({pointCount: user.pointCount});
+      if (!user.getPercent()){
+        res.json({msg: 'no points for user'})
+      } else {
+        res.json({pointCount: user.pointCount, percentage: user.getPercent()});
+      }
     });
   });
 };
