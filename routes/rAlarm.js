@@ -28,7 +28,6 @@ module.exports = function(app, appSecret) {
         return;
       }
       if (alarm.compareTimes()) {
-        console.log('got past comparetimes');
         User.findOneAndUpdate({id: req.body.id}, {$inc: {pointCount: 1}}, function(err, user) {
           if (err) {
             res.status(500).send({msg: 'could not add to pointcount'});

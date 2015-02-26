@@ -84,7 +84,6 @@ describe('/create_user, /user, and /alarm routes spec', function() {
         });
     });
   });
-
   after(function(done) {
     mongoose.connection.db.dropDatabase(function() {
       done();
