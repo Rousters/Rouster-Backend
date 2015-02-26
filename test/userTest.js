@@ -9,15 +9,9 @@ var expect = chai.expect;
 
 chai.use(chaihttp);
 
-<<<<<<< HEAD
-var server = 'localhost:3000';
-
-describe('/create_user, /user, and /user/id/alarm routes spec', function() {
-=======
 describe('/create_user, /user, and /alarm routes spec', function() {
->>>>>>> b95dfe1c1e6d7578634af4599ae6bbe193a7c577
   var id = 'testID';
-  var server = 'localhost:3000'
+  var server = 'localhost:3000';
 
   describe('/check_alarm specific route', function() {
     var token;
@@ -26,13 +20,11 @@ describe('/create_user, /user, and /alarm routes spec', function() {
         .post('/create_user')
         .send({id: id})
         .end(function(err, res) {
-          expect(err).to.eql(null);
-          expect(res).to.have.status(200);
-          expect(res.body).to.have.property('eat');
           token = res.body.eat;
           done();
         });
     });
+
     it('post should create alarm information for a user', function(done) {
       chai.request(server)
         .post('/create_alarm')
@@ -44,6 +36,7 @@ describe('/create_user, /user, and /alarm routes spec', function() {
           done();
         });
     });
+
     it('patch should add point if wake time met', function(done) {
       chai.request(server)
         .patch('/check_alarm')
@@ -55,17 +48,7 @@ describe('/create_user, /user, and /alarm routes spec', function() {
           done();
         });
     });
-    it('patch should not add point if wake time not met', function(done) {
-      chai.request(server)
-        .patch('/check_alarm')
-        .send({id: id, eat: token, wakeTime: 110})
-        .end(function(err, res) {
-          expect(err).to.eql(null);
-          expect(res).to.have.status(200);
-          expect(res.body.msg).to.eql('you suck');
-          done();
-        });
-    });
+
     it('get should return point count and percentage', function(done) {
       chai.request(server)
         .get('/get_points')
@@ -76,6 +59,28 @@ describe('/create_user, /user, and /alarm routes spec', function() {
           expect(res.body).to.have.property('pointCount');
           expect(res.body).to.have.property('percentage');
           done();
+        });
+    });
+
+    describe('patch should add negative point if time not met', function() {
+      before(function(done) {
+        chai.request(server)
+            .post('/create_alarm')
+            .send({id: id, eat: token, time: 100})
+            .end(function(err, res) {
+              done();
+            });
+      });
+      it('patch should not add point if wake time not met', function(done) {
+        chai.request(server)
+          .patch('/check_alarm')
+          .send({id: id, eat: token, wakeTime: 401})
+          .end(function(err, res) {
+            expect(err).to.eql(null);
+            expect(res).to.have.status(200);
+            expect(res.body.msg).to.eql('you suck');
+            done();
+          });
         });
     });
   });
