@@ -9,10 +9,15 @@ var expect = chai.expect;
 
 chai.use(chaihttp);
 
+<<<<<<< HEAD
 var server = 'localhost:3000';
 
 describe('/create_user, /user, and /user/id/alarm routes spec', function() {
+=======
+describe('/create_user, /user, and /alarm routes spec', function() {
+>>>>>>> b95dfe1c1e6d7578634af4599ae6bbe193a7c577
   var id = 'testID';
+  var server = 'localhost:3000'
 
   describe('/check_alarm specific route', function() {
     var token;
@@ -58,6 +63,18 @@ describe('/create_user, /user, and /user/id/alarm routes spec', function() {
           expect(err).to.eql(null);
           expect(res).to.have.status(200);
           expect(res.body.msg).to.eql('you suck');
+          done();
+        });
+    });
+    it('get should return point count and percentage', function(done) {
+      chai.request(server)
+        .get('/get_points')
+        .send({id: id, eat: token})
+        .end(function(err, res) {
+          expect(err).to.eql(null);
+          expect(res).to.have.status(200);
+          expect(res.body).to.have.property('pointCount');
+          expect(res.body).to.have.property('percentage');
           done();
         });
     });

@@ -34,11 +34,14 @@ module.exports = function(app, appSecret) {
             res.status(500).send({msg: 'could not add to pointcount'});
           }
           res.json({msg: 'point added!'});
-
         });
-      } else {
+      } else if (!alarm.compareTimes()) {
+        User.findOneAndUpdate({id: req.body.id}, {$inc: {negativeCount: 1}}, function(err, user) {
+        if (err) return res.status(500).send({msg: 'could not add to negativecount'});
         res.json({msg: 'you suck'});
+        });
       }
+      alarm.remove();
     });
   });
 };
