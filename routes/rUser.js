@@ -45,7 +45,7 @@ module.exports = function(app, appSecret) {
     User.findOne({id: req.body.id}, function(err, user){
       if (err) return res.status(500).send({msg: 'could not get user'});
       if (!user.getPercent()){
-        res.json({msg: 'no points for user'})
+        res.json({msg: 'no points for user'});
       } else {
         res.json({pointCount: user.pointCount, percentage: user.getPercent()});
       }
