@@ -12,7 +12,6 @@ var app = express();
 
 app.set('appSecret', process.env.SECRET || 'changethis');
 
-
 var userRouter = express.Router();
 var alarmRouter = express.Router();
 

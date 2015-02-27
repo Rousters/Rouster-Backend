@@ -52,7 +52,8 @@ describe('/create_user, /user, and /alarm routes spec', function() {
     it('get should return point count and percentage', function(done) {
       chai.request(server)
         .get('/get_points')
-        .send({id: id, eat: token})
+        .set('id', id)
+        .set('eat', token)
         .end(function(err, res) {
           expect(err).to.eql(null);
           expect(res).to.have.status(200);
@@ -71,6 +72,7 @@ describe('/create_user, /user, and /alarm routes spec', function() {
               done();
             });
       });
+
       it('patch should not add point if wake time not met', function(done) {
         chai.request(server)
           .patch('/check_alarm')
@@ -81,7 +83,7 @@ describe('/create_user, /user, and /alarm routes spec', function() {
             expect(res.body.msg).to.eql('you suck');
             done();
           });
-        });
+      });
     });
   });
   after(function(done) {

@@ -14,7 +14,7 @@ userSchema.methods.generateToken = function(appSecret, callback) {
 };
 
 userSchema.methods.getPercent = function() {
-  return Math.floor((this.pointCount/(this.pointCount + this.negativeCount)) * 100);
+  return Math.floor((this.pointCount / (this.pointCount + this.negativeCount)) * 100);
 };
 
 module.exports = mongoose.model('User', userSchema);

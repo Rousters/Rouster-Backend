@@ -36,11 +36,11 @@ module.exports = function(app, appSecret) {
         });
       } else if (!alarm.compareTimes()) {
         User.findOneAndUpdate({id: req.body.id}, {$inc: {negativeCount: 1}}, function(err, user) {
-        if (err) {
-          res.status(500).send({msg: 'could not add to negativecount'});
-          return;
-        }
-        res.json({msg: 'you suck'});
+          if (err) {
+            res.status(500).send({msg: 'could not add to negativecount'});
+            return;
+          }
+          res.json({msg: 'you suck'});
         });
       }
       alarm.remove();
