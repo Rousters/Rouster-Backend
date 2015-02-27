@@ -42,7 +42,7 @@ module.exports = function(app, appSecret) {
    */
   app.get('/get_points', eatAuth(appSecret), function(req, res) {
     console.log('hit get user');
-    User.findOne({id: req.body.id}, function(err, user){
+    User.findOne({id: req.headers.id}, function(err, user){
       if (err) return res.status(500).send({msg: 'could not get user'});
       if (!user.getPercent()){
         res.json({msg: 'no points for user'});
